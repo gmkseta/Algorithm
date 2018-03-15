@@ -89,6 +89,21 @@ int main()
 
 	}
 	
-	std::cout << acc.pop() << '\n';
+	float result = acc.pop();
+	if (result*10 - int(result*10) > 0)
+	{
+		std::cout << std::fixed;
+		std::cout.precision(2);
+		std::cout << result << std::endl;
+	}
+	else if (result - int(result) > 0)
+	{
+		std::cout << std::fixed;
+		std::cout.precision(1);
+		std::cout << result << std::endl;
+	}
+	else
+		std::cout << result << std::endl;
 
+	
 }

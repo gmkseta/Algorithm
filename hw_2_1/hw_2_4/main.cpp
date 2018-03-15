@@ -6,9 +6,7 @@
 #include <iomanip>
 #define MAX_NUM 55
 
-
 using namespace std;
-
 
 ostream& operator<<(ostream& strm, vector<int> arr)
 {
