@@ -14,21 +14,13 @@ public:
 		stack = new itemType[max]; p = 0;
 	}
 	~Stack1()
-	{
-		delete stack;
-	}
+	{delete stack;}
 	inline void push(itemType v)
-	{
-		stack[p++] = v;
-	}
+	{stack[p++] = v;}
 	inline itemType pop()
-	{
-		return stack[--p];
-	}
+	{return stack[--p];}
 	inline int empty()
-	{
-		return !p;
-	}
+	{return !p;}
 };
 
 int main()

@@ -21,15 +21,19 @@ vector<int> operator-(vector<int> arr1, vector<int> arr2)
 {
 	vector<int> ret_arr;//결과값 넣어주기위한 배열
 	vector<int>::iterator itr1, itr2;//계산을 위한 iterator
-	itr1 = arr1.begin();itr2 = arr2.begin();//맨처음엔 두 배열의 첫 요소로 시작
+	itr1 = arr1.begin();itr2 = arr2.begin();
+	//맨처음엔 두 배열의 첫 요소로 시작
 	while (true)
 	{
 		if (itr1 == arr1.end())break;//만약 끝이라면 멈춤
 		if (itr2 == arr2.end())break;
-		if (*itr1 < *itr2)itr1++;//itr2가 더 크다면 itr1는 arr1 의 다음 요소로 이동
-		else if (*itr1 > *itr2)itr2++;//itr1이 더 크다면 itr2는 arr2의 다음 요소로 이동
+		if (*itr1 < *itr2)itr1++;
+		//itr2가 더 크다면 itr1는 arr1 의 다음 요소로 이동
+		else if (*itr1 > *itr2)itr2++;
+		//itr1이 더 크다면 itr2는 arr2의 다음 요소로 이동
 		else
-		{//그 외 경우는 같을 경우 이므로 교집합임 이때 ret_arr에 넣어주고 각각을 다음 요소로 이동
+		{//그 외 경우는 같을 경우 이므로 교집합임 
+		//이때 ret_arr에 넣어주고 각각을 다음 요소로 이동
 			ret_arr.push_back(*(itr2++));
 			itr1++;
 		}
@@ -45,11 +49,20 @@ vector<int> operator+(vector<int> arr1, vector<int> arr2)
 	itr2 = arr2.begin();
 	while (true)//교집합과 비슷함
 	{
-		if (itr1 == arr1.end()){ret_arr.insert(ret_arr.end(),  itr2, arr2.end());break;}//itr1이 끝까지 돌았다면 itr2~arr2.end()까지 그냥 다 넣어버림
-		if (itr2 == arr2.end())	{ret_arr.insert(ret_arr.end(), itr1, arr1.end());break;}//마찬가지로 itr2이 끝까지 돌았다면 itr1~arr1.end()까지 그냥 다 넣어버림
-		if (*itr1 < *itr2)ret_arr.push_back(*(itr1++));//itr1이 더 작다면 itr1을 넣고 다음요소로이동
-		else if (*itr1 > *itr2)ret_arr.push_back(*(itr2++));//itr2가 더작다면 itr2를 넣고 다음 요소로 이동
-		else {ret_arr.push_back(*(itr2++));itr1++;}//같다면 넣고 둘다 다음요소로 이동
+		if (itr1 == arr1.end())
+		{
+			ret_arr.insert(ret_arr.end(),  itr2, arr2.end());break;
+		}//itr1이 끝까지 돌았다면 itr2~arr2.end()까지 그냥 다 넣어버림
+		if (itr2 == arr2.end())
+		{
+			ret_arr.insert(ret_arr.end(), itr1, arr1.end());break;
+		}//마찬가지로 itr2이 끝까지 돌았다면 itr1~arr1.end()까지 그냥 다 넣어버림
+		if (*itr1 < *itr2)ret_arr.push_back(*(itr1++));
+		//itr1이 더 작다면 itr1을 넣고 다음요소로이동
+		else if (*itr1 > *itr2)ret_arr.push_back(*(itr2++));
+		//itr2가 더작다면 itr2를 넣고 다음 요소로 이동
+		else {ret_arr.push_back(*(itr2++));itr1++;}
+		//같다면 넣고 둘다 다음요소로 이동
 	}
 	return ret_arr;//반환
 }
@@ -57,13 +70,12 @@ vector<int> operator+(vector<int> arr1, vector<int> arr2)
 class  InputNum
 {
 public:
-	vector <int>  arr[2];
-
 	InputNum()
 	{
-		cout << "Enter number ";
-		cin >> _num1;
-		cin >> _num2;
+		do {
+			cout << "10 이상 숫자 두개를 입력하세요 :";
+			cin >> _num1;cin >> _num2;
+		} while (_num1<10 &&_num2<10);
 		AddRandomNum();
 	}
 
@@ -105,6 +117,7 @@ public:
 
 
 private:
+	vector <int>  arr[2];
 	int _num1;
 	int _num2;
 };
