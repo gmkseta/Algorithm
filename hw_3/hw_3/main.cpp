@@ -42,7 +42,7 @@ int main()
 		x->info = c; x->l = z; x->r = z;
 		if (c == '+' || c == '*' || c == '-') { x->r = stack.pop(); x->l = stack.pop(); }		stack.push(x);
 	}
-	c = cin.get();
+	
 	traverse(stack.pop());
 	cout << endl;
 	return 0;
