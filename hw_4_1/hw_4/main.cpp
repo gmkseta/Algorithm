@@ -7,7 +7,7 @@ typedef int itemType;
 
 void shuffle(itemType* arr,int n)
 {
-	//srand((unsigned int)time(NULL));
+	srand((unsigned int)time(NULL));
 
 	for (int i = 1; i <= n; i++)
 	{
