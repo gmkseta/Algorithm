@@ -1,24 +1,12 @@
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
+
 #include <string>
 
 typedef int itemType;
 
-void shuffle(itemType* arr, int n)
-{
-	srand((unsigned int)time(NULL));
-
-	for (int i = 0; i < n; i++)
-	{
-		int a = rand() % n + 1;
-
-		itemType tmp = arr[a];
-		arr[a] = arr[i];
-		arr[i] = tmp;
-	}
-}
-
+int Ins_w = 0;
+int Bub_w = 0;
+int She_w = 0;
 
 void insertSort(itemType a[], int n)
 {
@@ -27,15 +15,18 @@ void insertSort(itemType a[], int n)
 	for (i = 2; i <= n; i++)
 	{
 		v = a[i]; j = i;
-
+		Ins_w += v;
 
 		while (a[j - 1] > v)
 		{
+
 			a[j] = a[j - 1];
+			Ins_w += a[j - 1];
 			j--;
 			a[j] = v;
+			Ins_w += v;
 		}
-	}
+	} 
 }
 
 void shellSort(itemType a[], int n)
@@ -50,13 +41,16 @@ void shellSort(itemType a[], int n)
 		for (i = h; i <= n; i++)
 		{
 			v = a[i]; j = i;
+			She_w += v;
 			while (a[j - h] > v)
 			{
 				a[j] = a[j - h]; j -= h;
-
+				She_w += a[j];
 				if (j <= h - 1) break;
 			}
 			a[j] = v;
+			She_w += v;
+
 		}
 	} while (h > 1);
 
@@ -65,23 +59,38 @@ void shellSort(itemType a[], int n)
 }
 
 
-int Compare_Cnt = 0;
-int DataMove_Cnt = 0;
+
 
 int Bubble(int sorted, itemType *a, int n)
 {
 	int temp;
-	if (++Compare_Cnt&&*(a - 1) > *a) {
-		temp = *(a - 1);
-		*(a - 1) = *a;
-		*a = temp;
-		DataMove_Cnt++;
+	if (*(a - 1) > *a) {
+		if (*(a - 1) < *a) {
+			
+			temp = *(a - 1);
+			Bub_w += temp;
+			*(a - 1) = *a;
+			Bub_w += *(a - 1);
+
+			*a = temp;
+			Bub_w += temp;
+		}
+		else  {
+			temp = *a;
+			Bub_w += temp;
+			*a= *(a - 1);
+			Bub_w += *a;
+
+			*(a - 1) = temp;
+			Bub_w += temp;
+		}
+		
 		sorted = false;
 	}
 	return sorted;
 }
 
-std::string bubbleSort(itemType a[], int n)
+void bubbleSort(itemType a[], int n)
 {
 
 	int i, Sorted;
@@ -97,8 +106,6 @@ std::string bubbleSort(itemType a[], int n)
 		j++;
 	}
 
-	std::string result = "Compare_Cnt : " + std::to_string(Compare_Cnt) + " DataMove_Cnt : " + std::to_string(DataMove_Cnt);
-	return result;
 }
 
 
@@ -112,28 +119,35 @@ int main()
 	cout << "배열의 크기를 입력하세요 (10000이상) >>";
 	cin >> n;
 
-	itemType *des_ord = new itemType[n];
-	itemType *rand_ord = new itemType[n];
+	itemType *des_ord = new itemType[n + 1];
+	itemType *des_ord1 = new itemType[n + 1];
+	itemType *des_ord2 = new itemType[n + 1];
 
-	for (int i = 0; i <n; i++)
+	for (int i = 1; i <=n; i++)
 	{
-		des_ord[i] = n - i;
-		rand_ord[i] = n - i;
+		des_ord[i] = n - i + 1;
+		des_ord1[i] = n - i + 1;
+		des_ord2[i] = n - i + 1;
 	}
+	des_ord[0] = INT_MIN;
+	des_ord1[0] = INT_MIN;
+	des_ord2[0] = INT_MIN;
 
-	shuffle(rand_ord, n);
 
 
 	cout << "Descending Order Array" << endl;
-	for (int i = 0; i < 20; i++)
+	for (int i = 1; i <= 20; i++)
 		cout << des_ord[i] << " ";
+	cout << endl;
+	insertSort(des_ord1, n);
+	shellSort(des_ord2, n);
+	bubbleSort(des_ord, n);
 
-	cout << endl << bubbleSort(des_ord, n) << endl;
+	cout << "Bubble Sort : " << Bub_w << endl;
 
-	cout << "Random Order Array" << endl;
-	for (int i = 0; i < 20; i++)
-		cout << rand_ord[i] << " ";
-	cout << endl << bubbleSort(rand_ord, n) << endl;
+	cout << "Insertion Sort : " << Ins_w<< endl;
+
+	cout << "Shell Sort : " << She_w << endl;
 
 
 

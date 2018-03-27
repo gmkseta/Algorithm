@@ -11,7 +11,7 @@ void shuffle(itemType* arr, int n)
 
 	for (int i = 0; i < n; i++)
 	{
-		int a = rand() % n + 1;
+		int a = rand() % n ;
 
 		itemType tmp = arr[a];
 		arr[a] = arr[i];
