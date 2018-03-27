@@ -30,6 +30,7 @@ void visit(struct treeNode *t);
 void traverse(struct treeNode *t);
 
 using namespace std;
+
 int main()
 {
 	
@@ -46,6 +47,7 @@ int main()
 	traverse(stack.pop());
 	cout << endl;
 	return 0;
+
 }
 void visit(struct treeNode *t)
 {
