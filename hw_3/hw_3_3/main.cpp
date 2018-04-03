@@ -69,30 +69,19 @@ void visit(struct treeNode *t )
 	std::cout << t->level << std::endl;
 }
 int traverse(struct treeNode *t ,char c)
-{
-	
+{	
 	queue.put(t);
 	while (!queue.empty())
 	{
 		t = queue.get();// visit(t);
-
-		if (t->info == c)
-		{
-			visit(t);
-			return 1;
-		}
-
-
-		if (t->l != z)
-		{
+		if (t->info == c){visit(t);
+			return 1;}
+		if (t->l != z){
 			queue.put(t->l);
-			t->l->level = t->level + 1;
-		}
-		if (t->r != z)
-		{
+			t->l->level = t->level + 1;}
+		if (t->r != z){
 			queue.put(t->r);
-			t->r->level = t->level + 1;
-		}
+			t->r->level = t->level + 1;}
 	}
 	std::cout << "Not Found" << std::endl;
 	return 0;

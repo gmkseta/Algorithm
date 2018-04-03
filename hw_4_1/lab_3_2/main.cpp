@@ -33,8 +33,9 @@ void insertSort(itemType a[], int n)
 		{
 			a[j] = a[j - 1];
 			j--;
-			a[j] = v;
 		}
+			a[j] = v;
+		
 	}
 }
 
@@ -47,21 +48,25 @@ std::string shellSort(itemType a[],int n)
 	h = 1;  do h = 3 * h + 1; while (h < n);
 	do {
 		h = h / 3;
-		for (i = h; i <= n; i++)
+		for (i = h; i < n; i++)
 		{
-			v = a[i]; j = i;
+			v = a[i]; 
+			++DataMove_Cnt;
+			j = i;
+
 			while (++Compare_Cnt&& a[j - h] > v)
 			{
 				a[j] = a[j - h]; j -= h; 
 				++DataMove_Cnt;
-				if (++Compare_Cnt && j <= h - 1) break;
+				if (j < h - 1) break;
 			}
 			a[j] = v;
+			++DataMove_Cnt;
 		}
 	} while (h > 1);
 
 
-	std::string result = "Compare_Cnt : " + std::to_string(Compare_Cnt) + " DataMove_Cnt : " + std::to_string(DataMove_Cnt);
+	std::string result = "\nCompare_Cnt : " + std::to_string(Compare_Cnt) + " DataMove_Cnt : " + std::to_string(DataMove_Cnt)+"\n";
 	return result;
 
 }
@@ -86,13 +91,12 @@ int main()
 	}
 	
 	shuffle(rand_ord, n);
-
-
+	cout << endl << "收收收收收收收收收收收收收收收Shell Sort收收收收收收收收收收收收收收收" << endl;
 	cout << "Descending Order Array" << endl;
 	for (int i = 0; i < 20; i++)
 		cout << des_ord[i] << " ";
 
-	cout << endl << shellSort(des_ord, n) << endl;
+	cout << endl << shellSort(des_ord, n) << endl<<endl;
 
 
 

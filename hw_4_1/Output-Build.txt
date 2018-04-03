@@ -1,0 +1,5 @@
+﻿1>------ Build started: Project: lab_3_3, Configuration: Debug Win32 ------
+1>  main.cpp
+1>  lab_3_3.vcxproj -> D:\Users\gmkse\Source\Repos\Algorithm\hw_4_1\Debug\lab_3_3.exe
+1>  lab_3_3.vcxproj -> D:\Users\gmkse\Source\Repos\Algorithm\hw_4_1\Debug\lab_3_3.pdb (Full PDB)
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========

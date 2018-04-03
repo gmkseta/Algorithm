@@ -23,9 +23,11 @@ void insertSort(itemType a[], int n)
 			a[j] = a[j - 1];
 			Ins_w += a[j - 1];
 			j--;
-			a[j] = v;
-			Ins_w += v;
 		}
+			a[j] = v;
+
+			Ins_w += v;
+		
 	} 
 }
 
@@ -38,18 +40,21 @@ void shellSort(itemType a[], int n)
 	h = 1;  do h = 3 * h + 1; while (h < n);
 	do {
 		h = h / 3;
-		for (i = h; i <= n; i++)
+		for (i = h+1; i <= n; i++)
 		{
 			v = a[i]; j = i;
-			She_w += v;
+			if(a[i-h]>v)She_w += v;
+
 			while (a[j - h] > v)
 			{
 				a[j] = a[j - h]; j -= h;
 				She_w += a[j];
+
+				if (j - h <= 0 || a[j - h] <= v)She_w += v;
 				if (j <= h - 1) break;
 			}
 			a[j] = v;
-			She_w += v;
+		//	She_w += v;
 
 		}
 	} while (h > 1);
@@ -99,7 +104,7 @@ void bubbleSort(itemType a[], int n)
 	while (!Sorted) {
 		Sorted = true;
 		//여기서 버블정렬 이런 코드면 대각선 상관없이 쭉 돌리는거아닌가;
-		for (i = 1; i < n - j; i++)
+		for (i = 2; i <= n - j; i++)
 		{
 			Sorted = Bubble(Sorted, &a[i], n);
 		}
@@ -135,9 +140,9 @@ int main()
 
 
 
-	cout << "Descending Order Array" << endl;
-	for (int i = 1; i <= 20; i++)
-		cout << des_ord[i] << " ";
+	//cout << "Descending Order Array" << endl;
+	//for (int i = 1; i <= 20; i++)
+	//	cout << des_ord[i] << " ";
 	cout << endl;
 	insertSort(des_ord1, n);
 	shellSort(des_ord2, n);

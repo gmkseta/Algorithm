@@ -33,8 +33,9 @@ void insertSort(itemType a[], int n)
 		{
 			a[j] = a[j - 1];
 			j--;
-			a[j] = v;
 		}
+			a[j] = v;
+		
 	}
 }
 
@@ -47,14 +48,14 @@ void shellSort(itemType a[], int n)
 	h = 1;  do h = 3 * h + 1; while (h < n);
 	do {
 		h = h / 3;
-		for (i = h; i <= n; i++)
+		for (i = h; i < n; i++)
 		{
 			v = a[i]; j = i;
 			while (a[j - h] > v)
 			{
 				a[j] = a[j - h]; j -= h;
 				
-				if ( j <= h - 1) break;
+				if ( j < h - 1) break;
 			}
 			a[j] = v;
 		}
@@ -83,19 +84,20 @@ int Bubble(int sorted, itemType *a, int n)
 
 std::string bubbleSort(itemType a[], int n)
 {
-	
+	Compare_Cnt = 0;
+	DataMove_Cnt = 0;
 	int i, Sorted;
-	int j = 0;
+	//int j = 0;
 	Sorted = false;
 	while (!Sorted) {
 		Sorted = true;
 		//여기서 버블정렬 이런 코드면 대각선 상관없이 쭉 돌리는거아닌가;
-		for (i = 1; i < n-j; i++)
+		for (i = 1; i < n; i++)
 		{
 			Sorted = Bubble(Sorted, &a[i], n);
 		}
-		j++;
-	}
+		n--;
+}
 
 	std::string result = "Compare_Cnt : " + std::to_string(Compare_Cnt) + " DataMove_Cnt : " + std::to_string(DataMove_Cnt);
 	return result;
@@ -123,12 +125,12 @@ int main()
 
 	shuffle(rand_ord, n);
 
-
+	cout << endl << "━━━━━━━━━━━━━━━Bubble Sort━━━━━━━━━━━━━━━" << endl;
 	cout << "Descending Order Array" << endl;
 	for (int i = 0; i < 20; i++)
 		cout << des_ord[i] << " ";
 
-	cout << endl << bubbleSort(des_ord, n) << endl;
+	cout << endl << bubbleSort(des_ord, n) << endl<<endl;
 
 	cout << "Random Order Array" << endl;
 	for (int i = 0; i < 20; i++)
