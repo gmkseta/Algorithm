@@ -1,107 +1,82 @@
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
+#include <fstream>
+#include <sstream>
+#include <vector>
 #include <string>
+#define D_MAX_ARRAY_SIZE 512
 
-typedef int itemType;
+using namespace std;
 
-#define N 10000
-itemType* sorted = new itemType[N];
-void merge(itemType a[], int l, int mid, int r) {
-	int i, j, k, n;
-
-
-
-	i = l; j = mid + 1; k = l;
-	n = j - i;
-
-	while (i <= mid && j <= r) {
-		if (a[i] <= a[j]) {
-			sorted[k++] = a[i++];
-		}
-		else {
-			sorted[k++] = a[j++];
-		}
-	}
-	if (i>mid)
-		for (n = j; n <= r; n++) sorted[k++] = a[n];
-	else
-		for (n = i; n <= mid; n++) sorted[k++] = a[n];
-	for (n = l; n <= r; n++) a[n] = sorted[n];
-
-	//delete sorted
-}
-void mergesort(itemType a[], int l, int r) {
-	int mid;
-	if (l < r) {
-		mid = (l + r) / 2;
-		mergesort(a, l, mid);
-		mergesort(a, mid + 1, r);
-		merge(a, l, mid, r);
-	}
-}
-
-void shuffle(itemType* arr, int n)
+struct node
 {
-	srand((unsigned int)time(NULL));
-	for (int i = 0; i < n; i++)
-	{
-		int a = rand() % n;
-		itemType tmp = arr[a];
-		arr[a] = arr[i];
-		arr[i] = tmp;
-	}
+	struct node *l;
+	int key;
+	struct node *r;
+};
+
+void TreeInit()
+{
+	struct node *t, *head;
+	head = (struct node *) malloc(sizeof *head);
+	head->l = NULL;
+	head->r = NULL;
+	head->key = 0;
 }
 
+struct node *TreeSearch(struct node *head, int xkey)
+{
+	struct node *t;
+	t =  head->r;
+	while (t != NULL) {
+		if (xkey == t->key)return(t);
+		if (xkey < t->key)t = t->l;
+		if (xkey > t->key)t = t->r;
+	}
+	return (NULL);
+}
 
+void TreeInsert(struct node *head , int xkey)
+{
+	struct node *p, *t;
+
+}
+
+void Tokenize(const string&str, vector<string>& tokens, const string& delimiters = " ")
+{
+
+	string::size_type lastPos = str.find_first_not_of(delimiters, 0);
+	string::size_type pos = str.find_first_of(delimiters, lastPos);
+
+	while (string::npos != pos || string::npos != lastPos)
+	{
+		tokens.push_back(str.substr(lastPos, pos - lastPos));
+		lastPos = str.find_first_not_of(delimiters, pos);
+		pos = str.find_first_of(delimiters, lastPos);
+	}
+}
 
 int main()
 {
+	ifstream inf("paragraph.txt");
+	stringstream infstream;
 
-	using namespace std;
-	int n;
+	string inStr;
+	vector <string> splited;	
 
-	cout << "배열의 크기를 입력하세요 (10000이상) >>";
-	cin >> n;
+	infstream<< inf.rdbuf();
 
-	itemType *des_ord = new itemType[n];
-	itemType *rand_ord = new itemType[n];
+	inStr = infstream.str();
 
-	for (int i = 0; i < n; i++)
+
+	cout << inStr << endl;
+
+	Tokenize(inStr,splited," .");
+
+
+	for (auto itr : splited)
 	{
-		des_ord[i] = n - i;
-		rand_ord[i] = n - i;
+		cout << itr << endl;
 	}
 
-	shuffle(rand_ord, n);
-
-	cout << endl << "━━━━━━━━━━━━━━━Merge Sort━━━━━━━━━━━━━━━" << endl;
-	cout << "Descending Order Array" << endl;
-	for (int i = 0; i < 20; i++)
-		cout << des_ord[i] << " ";
-
-
-	//	cout << endl << insertion(des_ord, n) << endl << endl;
-
-	mergesort(des_ord, 0, n - 1);
-
-	cout << endl << endl;
-	for (int i = 0; i < 20; i++)
-		cout << des_ord[i] << " ";
-
-	cout << endl;
-
-
-	cout << "Random Order Array" << endl;
-	for (int i = 0; i < 20; i++)
-		cout << rand_ord[i] << " ";
-
-	cout << endl << endl;
-
-	mergesort(rand_ord, 0, n - 1);
-
-	for (int i = 0; i < 20; i++)
-		cout << rand_ord[i] << " ";
-
-
+	return 0;
 }
