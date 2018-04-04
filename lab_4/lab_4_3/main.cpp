@@ -7,39 +7,7 @@
 
 using namespace std;
 
-struct node
-{
-	struct node *l;
-	int key;
-	struct node *r;
-};
 
-void TreeInit()
-{
-	struct node *t, *head;
-	head = (struct node *) malloc(sizeof *head);
-	head->l = NULL;
-	head->r = NULL;
-	head->key = 0;
-}
-
-struct node *TreeSearch(struct node *head, int xkey)
-{
-	struct node *t;
-	t =  head->r;
-	while (t != NULL) {
-		if (xkey == t->key)return(t);
-		if (xkey < t->key)t = t->l;
-		if (xkey > t->key)t = t->r;
-	}
-	return (NULL);
-}
-
-void TreeInsert(struct node *head , int xkey)
-{
-	struct node *p, *t;
-
-}
 
 void Tokenize(const string&str, vector<string>& tokens, const string& delimiters = " ")
 {
