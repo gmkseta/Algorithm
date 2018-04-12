@@ -7,6 +7,10 @@ typedef int itemType;
 
 #define N 10000
 itemType* sorted = new itemType[N];
+
+int compare = 0;
+int data = 0;
+
 void merge(itemType a[], int l, int mid, int r) {
 	int i, j, k, n;
 	
@@ -16,20 +20,25 @@ void merge(itemType a[], int l, int mid, int r) {
 	n = j - i;
 	
 	while (i <= mid && j <= r) {
-		if (a[i] <= a[j]) {
+		if (++compare&&a[i] <= a[j]) {//컴페어
+			
 			sorted[k++] = a[i++];
+			//데이터
+			data++;
 		}
 		else {
 			sorted[k++] = a[j++];
+			//데이터
+			data++;
 		}
 	}
-	if (i>mid)
-		for (n = j; n <= r; n++) sorted[k++] = a[n];
+	if (i > mid)
+		for (n = j; n <= r; n++) { sorted[k++] = a[n];	data++; }
 	else
-		for (n = i; n <= mid; n++) sorted[k++] = a[n];
+		for (n = i; n <= mid; n++) { sorted[k++] = a[n];	data++; }
 	for (n = l; n <= r; n++) a[n] = sorted[n];
 
-	//delete sorted
+	//delete sorted 
 }
 void mergesort(itemType a[], int l, int r) {
 	int mid;
@@ -57,7 +66,8 @@ void shuffle(itemType* arr, int n)
 
 int main()
 {
-
+	extern int compare;
+	extern int data;
 	using namespace std;
 	int n;
 
@@ -91,6 +101,12 @@ int main()
 
 	cout << endl;
 
+	cout << "datamove_cnt : " << data << "  compare_cnt : " << compare << endl;
+
+	data = 0;
+	compare = 0;
+
+
 
 	cout << "Random Order Array" << endl;
 	for (int i = 0; i < 20; i++)
@@ -102,6 +118,13 @@ int main()
 
 	for (int i = 0; i < 20; i++)
 		cout << rand_ord[i] << " ";
+
+
+	cout <<endl <<"datamove_cnt : " << data << "  compare_cnt : " << compare << endl;
+
+	data = 0;
+	compare = 0;
+
 
 
 }

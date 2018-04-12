@@ -20,31 +20,11 @@ void shuffle(itemType* arr, int n)
 }
 
 
-void insertSort(itemType a[], int n)
-{
-	int i, j; itemType v;
-	
-	for (i = 2; i <= n; i++)
-	{
-		v = a[i]; j = i;
-
-
-		while (a[j - 1] > v)
-		{
-			a[j] = a[j - 1];
-			j--;
-		}
-			a[j] = v;
-		
-	}
-}
 
 std::string shellSort(itemType a[],int n)
 {
-
 	int i, j, h; itemType v;
 	int Compare_Cnt = 0, DataMove_Cnt = 0;
-
 	h = 1;  do h = 3 * h + 1; while (h < n);
 	do {
 		h = h / 3;

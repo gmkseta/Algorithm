@@ -5,6 +5,9 @@
 
 typedef int itemType;
 
+int compare = 0;
+int data = 0;
+
 inline void swap(itemType a[], int i, int j)
 {
 	itemType  t = a[i]; a[i] = a[j]; a[j] = t;
@@ -15,17 +18,15 @@ int partition(itemType a[], int l, int r) {
 	if (r > l) {
 		v = a[l]; i = l; j = r + 1;
 		for (;;) {
-			while (a[++i] < v);
-			while (a[--j] > v);
+			while (a[++i] < v)compare++;//컴페어
+			while (a[--j] > v)compare++;//컴페어
 			if (i >= j) break;
-			swap(a, i, j);
+			swap(a, i, j); data++;//데이터
 		}
-		swap(a, j, l);
+		swap(a, j, l); data++;//데이터
 	}
 	return j;
 }
-
-
 
 void quicksort(itemType a[], int l, int r) {
 	int  j;
@@ -50,32 +51,12 @@ void shuffle(itemType* arr, int n)
 }
 
 
-std::string insertion(itemType a[], int n)
-{
-	int i, j; itemType v;
-	int Compare_Cnt = 0, DataMove_Cnt = 0;
-	for (i = 2; i <= n; i++)
-	{
-		v = a[i];
-		DataMove_Cnt++;
-		j = i;
-		while (++Compare_Cnt&&a[j - 1] > v)
-		{
-			a[j] = a[j - 1];
-			DataMove_Cnt++;
-			j--;
-		}
-		a[j] = v;
-		DataMove_Cnt++;
-	}
-	std::string result = "Compare_Cnt : " + std::to_string(Compare_Cnt) + " DataMove_Cnt : " + std::to_string(DataMove_Cnt);
-	return result;
-}
 
 
 int main()
 {
-
+	extern int data;
+	extern int compare;
 	using namespace std;
 	int n;
 
@@ -96,7 +77,7 @@ int main()
 
 	shuffle(rand_ord, n);
 
-	cout << endl << "━━━━━━━━━━━━━━━Insertion Sort━━━━━━━━━━━━━━━" << endl;
+	cout << endl << "━━━━━━━━━━━━━━━   Quick Sort   ━━━━━━━━━━━━━━━" << endl;
 	cout << "Descending Order Array" << endl;
 	for (int i = 0; i < 20; i++)
 		cout << des_ord[i] << " ";
@@ -113,7 +94,12 @@ int main()
 	cout << endl;
 
 
-	cout << "Random Order Array" << endl;
+	cout << "datamove_cnt : " << data << "  compare_cnt : " << compare << endl;
+
+	data = 0;
+	compare = 0;
+
+	cout <<endl<< "Random Order Array" << endl;
 	for (int i = 0; i < 20; i++)
 		cout << rand_ord[i] << " ";
 	
@@ -123,6 +109,9 @@ int main()
 
 	for (int i = 0; i < 20; i++)
 		cout << rand_ord[i] << " ";
+
+
+	cout<<endl << "datamove_cnt : " << data << "  compare_cnt : " << compare << endl;
 
 
 }

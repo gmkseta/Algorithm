@@ -23,10 +23,14 @@ void insertSort(itemType a[], int n)
 			a[j] = a[j - 1];
 			Ins_w += a[j - 1];
 			j--;
+
+			
 		}
 			a[j] = v;
 
 			Ins_w += v;
+
+
 		
 	} 
 }
@@ -121,7 +125,7 @@ int main()
 	using namespace std;
 	int n;
 
-	cout << "배열의 크기를 입력하세요 (10000이상) >>";
+	cout << "배열의 크기를 입력하세요 (500이상) >>";
 	cin >> n;
 
 	itemType *des_ord = new itemType[n + 1];
@@ -148,9 +152,11 @@ int main()
 	shellSort(des_ord2, n);
 	bubbleSort(des_ord, n);
 
+
+	cout << "Insertion Sort : " << Ins_w << endl;
+
 	cout << "Bubble Sort : " << Bub_w << endl;
 
-	cout << "Insertion Sort : " << Ins_w<< endl;
 
 	cout << "Shell Sort : " << She_w << endl;
 

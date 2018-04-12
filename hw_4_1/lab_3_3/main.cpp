@@ -20,51 +20,6 @@ void shuffle(itemType* arr, int n)
 }
 
 
-void insertSort(itemType a[], int n)
-{
-	int i, j; itemType v;
-
-	for (i = 2; i <= n; i++)
-	{
-		v = a[i]; j = i;
-
-
-		while (a[j - 1] > v)
-		{
-			a[j] = a[j - 1];
-			j--;
-		}
-			a[j] = v;
-		
-	}
-}
-
-void shellSort(itemType a[], int n)
-{
-
-	int i, j, h; itemType v;
-	
-
-	h = 1;  do h = 3 * h + 1; while (h < n);
-	do {
-		h = h / 3;
-		for (i = h; i < n; i++)
-		{
-			v = a[i]; j = i;
-			while (a[j - h] > v)
-			{
-				a[j] = a[j - h]; j -= h;
-				
-				if ( j < h - 1) break;
-			}
-			a[j] = v;
-		}
-	} while (h > 1);
-
-
-
-}
-
 
 int Compare_Cnt = 0;
 int DataMove_Cnt = 0;
