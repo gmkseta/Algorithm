@@ -23,13 +23,16 @@ public:
 		z = new node(0, infoNIL, 0, 0);
 		head = new node(itemMIN, infoNIL, z, z);
 	}
-	~BST(){};
+
+	~BST() {};
+
 	infoType BSTsearch(itemType v) {
 		struct node *x = head->r;
 		z->key = v;  // 아래 반복문을 간결히 만들기 위함
 		while (++compare&&v != x->key)  x = (v < x->key) ? x->l : x->r;
 		return x->info;
 	}
+
 	void BSTinsert(itemType v, infoType info) {
 		struct node *p, *x;
 		p = head; x = head->r;
@@ -37,6 +40,35 @@ public:
 		x = new node(v, info, z, z);
 		if (v < p->key) p->l = x; else p->r = x;
 	}
+
+	void BSTdelete(itemType v) {
+		struct node *x = head->r, *p, *t, *c;
+		p = head;
+		while (++compare&&x->key != v && x != z) {
+			p = x;
+			x = (v < x->key) ? x->l : x->r;
+		}
+
+		
+		if (x == z) return;
+		else t = x;
+
+		
+		if (t->r == z) x = t->l;
+		else if (t->r->l == z) {
+			x = t->r; x->l = t->l;
+		}
+		else {
+			
+			c = x->r; while (c->l->l != z) c = c->l;
+			x = c->l; c->l = x->r;
+			x->l = t->l; x->r = t->r;
+		}
+		free(t);
+		if (v<p->key) p->l = x; else p->r = x;
+		
+	}
+
 };
 
 
@@ -45,19 +77,18 @@ class makeArr
 private:
 	itemType* arr;
 	int N;
-public : 
-	
+public:
+
 	makeArr(int n)
 	{
 		N = n;
 		arr = new itemType[n];
 	}
 
-	void make_des_arr(){for (int i = 0; i < N; i++) arr[i] = N - i;}
-	void make_rand_arr() 
+	void make_des_arr() { for (int i = 0; i < N; i++) arr[i] = N - i; }
+	void make_rand_arr()
 	{
-		srand((unsigned int)time(NULL));
-		make_des_arr(); 
+		make_des_arr();
 		for (int i = 0; i < N; i++)
 		{
 			int c = rand() % N;
@@ -76,7 +107,7 @@ int main()
 	int n;
 	cout << "배열의 크기를 입력하세요 (10000>= n >=100)" << endl;
 	cin >> n;
-
+	srand((unsigned int)time(NULL));
 	makeArr arr(n);
 	BST tree(n);
 
@@ -85,12 +116,14 @@ int main()
 	for (int i = 0; i < n; i++)
 		tree.BSTinsert(arr.get(i), infoNIL);
 
-	for (int i = 0; i < n; i++)
-		tree.BSTsearch(i);
+	for (int i = 0; i < n/10; i++)
+	{
+		tree.BSTdelete(arr.get(i*10+rand()%10));
+	}
 
-	cout << ((double)compare/n) << endl;
+	cout << ((double)compare / (n/10)) << endl;
 
-	
+
 	return 0;
 }
 

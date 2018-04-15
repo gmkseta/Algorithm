@@ -25,7 +25,7 @@ public:
 		RootValue = a[Root];
 		LeftSon = 2 * Parent + 1;
 		RightSon = LeftSon + 1;
-		while (++compare&&LeftSon <= LastNode) {
+		while (++compare&&LeftSon <= LastNode){
 			if (++compare&&RightSon <= LastNode && a[LeftSon] < a[RightSon]) {
 				Son = RightSon;
 			}
