@@ -34,15 +34,6 @@ public:
 };
 
 
-void printFP(void (makeArr::*fp)(void),makeArr arr , SORT cnt )
-{
-	arr.changePF(fp);
-	arr.usePF();
-
-	arr.print_arr();
-	cnt.SelectionSort(arr.arr, arr.getN());
-	arr.print_arr();
-}
 
 
 int main()
@@ -52,18 +43,23 @@ int main()
 	int n;
 	cin >> n;
 
-	makeArr* arr=new makeArr(n,true);
+	makeArr arr(n,true);
 	SORT cnt;
 
 
-	printFP(arr->make_des_arr, *arr, cnt);
 
-	
-	arr->make_rand_arr();
+	arr.make_des_arr();
+	arr.print_arr();
+	cnt.SelectionSort(arr.arr, n);
+	arr.print_arr();
 
-	arr->print_arr();
 
-	cnt.SelectionSort(arr->arr, n);
+
+	arr.make_rand_arr();
+
+	arr.print_arr();
+
+	cnt.SelectionSort(arr.arr, n);
 
 
 
