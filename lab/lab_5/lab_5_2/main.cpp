@@ -24,9 +24,9 @@ public:
 		compare = 0; datamove = 0;
 		for (i = 1; i <= k; i++) N[i] = 0;
 
-		for (i = 1; i <= n; i++) N[a[i]] = N[a[i]] + 1; 
+		for (i = 1; i <= n; i++) { N[a[i]] = N[a[i]] + 1; datamove++; }
 
-		for (i = 2; i <= k; i++) N[i] = N[i] + N[i - 1];
+		for (i = 2; i <= k; i++)  N[i] = N[i] + N[i - 1];
 
 		for (j = n; j >= 1; j--) {
 			datamove++;
