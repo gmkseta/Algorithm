@@ -14,16 +14,19 @@ public class bubble {
 			for(i = 1 ; i < n ; i ++)
 				if(A[i-1]>A[i]) 
 				{
-						int tmp = A[i-1];
-						A[i-1]=A[i];
-						A[i]=tmp;
+						swap(A,i,i-1);
 						Sorted=false;
 				}
 		}
 	}
 	
+	static void swap(int A[],int i,int j)
+	{
+		int tmp = A[j];
+		A[j]=A[i];
+		A[i]=tmp;
+	}
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
 		Scanner sc = new Scanner(System.in);
 		
@@ -38,7 +41,6 @@ public class bubble {
 		
 		BubbleSort(arr.getArr(),n);
 		arr.printArr();
-		
 		sc.close();
 		
 		
