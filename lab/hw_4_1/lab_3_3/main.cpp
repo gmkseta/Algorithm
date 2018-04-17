@@ -52,7 +52,7 @@ std::string bubbleSort(itemType a[], int n)
 			Sorted = Bubble(Sorted, &a[i], n);
 		}
 		n--;
-}
+	}
 
 	std::string result = "Compare_Cnt : " + std::to_string(Compare_Cnt) + " DataMove_Cnt : " + std::to_string(DataMove_Cnt);
 	return result;

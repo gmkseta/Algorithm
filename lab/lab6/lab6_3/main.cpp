@@ -50,25 +50,19 @@ public:
 			p = x;
 			x = (v < x->key) ? x->l : x->r;
 		}
-
-
 		if (x == z) return;
 		else t = x;
-
-
 		if (t->r == z) x = t->l;
 		else if (t->r->l == z) {
 			x = t->r; x->l = t->l;
 		}
 		else {
-
 			c = x->r; while (c->l->l != z) c = c->l;
 			x = c->l; c->l = x->r;
 			x->l = t->l; x->r = t->r;
 		}
 		free(t);
 		if (v<p->key) p->l = x; else p->r = x;
-
 	}
 
 	void BSTtraversal(node* t,BST bst)
