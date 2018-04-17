@@ -3,6 +3,21 @@ import java.util.Scanner;
 
 public class bubble {
 
+	static void insertion(int A[] , int n)
+	{
+		int i , j ,v;
+		for(i = 2; i <= n ; i++)
+		{
+			v= A[i];
+			j=i;
+			while(v<A[j-1])
+			{
+				A[j]=A[j-1];
+				j--;
+			}
+			A[j]=v;
+		}
+	}
 	
 	static void BubbleSort(int A[],int n)
 	{
@@ -32,14 +47,14 @@ public class bubble {
 		
 		int n = sc.nextInt();
 		
-		makeArr arr = new makeArr(n);
+		makeArr arr = new makeArr(n,true);
 		
 		arr.des();
 		arr.printArr();		
 		arr.rand();
 		arr.printArr();
 		
-		BubbleSort(arr.getArr(),n);
+		insertion(arr.getArr(),n);
 		arr.printArr();
 		sc.close();
 		
