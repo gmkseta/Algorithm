@@ -1,8 +1,24 @@
 package Sort;
 import java.util.Scanner;
 
-public class bubble {
+public class sorting {
 
+	static void selection(int A[],int n)
+	{
+		for(int i = 0 ; i < n-1 ; i ++)
+		{
+			int minIndex = i;
+			
+			for(int j = i+1 ; j< n ; j++)
+			{
+				if(A[minIndex]>A[j])
+					minIndex=j;
+			}
+			swap(A,i,minIndex);
+		}
+	}
+	
+	
 	static void insertion(int A[] , int n)
 	{
 		int i , j ,v;
@@ -47,14 +63,14 @@ public class bubble {
 		
 		int n = sc.nextInt();
 		
-		makeArr arr = new makeArr(n,true);
+		makeArr arr = new makeArr(n);
 		
 		arr.des();
 		arr.printArr();		
 		arr.rand();
 		arr.printArr();
 		
-		insertion(arr.getArr(),n);
+		selection(arr.getArr(),n);
 		arr.printArr();
 		sc.close();
 		
