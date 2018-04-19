@@ -94,6 +94,17 @@ public class sorting {
 		System.out.println(a);
 	}
 	
+	
+	static void shellSort(int A[],int n)
+	{
+		int h = 1;
+		while(h<n)
+		{
+			h = 3*h+1;
+		}
+		
+	}
+	
 	static void swap(int A[],int i,int j)
 	{
 		int tmp = A[j];
