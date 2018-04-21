@@ -176,6 +176,8 @@ public:
 int main()
 {
 	int size;
+
+	cout << "배열의 크기를 입력하세요 N(10000>N>=1000)" << endl;
 	cin >> size;
 	RandomArray arr(size);
 	arr.create_arr();
@@ -194,12 +196,14 @@ int main()
 		T3.search(i);
 		h1.search(i); h2.search(i); h3.search(i);
 	}
-	cout << T3.compare_cnt1 / size << "(T3의 구축 시 평균 비교 회수)" << endl;
-	cout << h1.compare_cnt1 / size << "(h1의 구축 시 평균 비교 회수)" << endl;
-	cout << h2.compare_cnt1 / size << "(h2의 구축 시 평균 비교 회수)" << endl;
-	cout << h3.compare_cnt1 / size << "(h3의 구축 시 평균 비교 회수)" << endl << endl;
-	cout << T3.compare_cnt2 / size << "(T3의 평균 비교 회수)" << endl;
-	cout << h1.compare_cnt2 / size << "(h1의 평균 비교 회수)" << endl;
-	cout << h2.compare_cnt2 / size << "(h2의 평균 비교 회수)" << endl;
-	cout << h3.compare_cnt2 / size << "(h3의 평균 비교 회수)" << endl;
+	cout << "T3의 구축 시 평균 비교 회수 : " << T3.compare_cnt1 / size << endl;
+	cout << "Hash Table크기가 11인 경우의 구축시 평균 비교 회수 : " << h1.compare_cnt1 /size << endl;
+	cout << "Hash Table크기가 101인 경우의 구축시 평균 비교 회수: " << h2.compare_cnt1 /size<< endl;
+	cout << "Hash Table크기가 1009인 경우의 구축시 평균 비교 회수 : " << h3.compare_cnt1 /size << endl;
+
+	cout << "T3의 평균 비교 회수 : " << T3.compare_cnt2 / size << endl;
+	cout << "Hash Table크기가 11인 경우 평균 비교 회수 : " << h1.compare_cnt2 / size << endl;
+	cout << "Hash Table크기가 101인 경우 평균 비교 회수 : " << h2.compare_cnt2 / size << endl;
+	cout << "Hash Table크기가 1009인 경우 평균 비교 회수 : " << h3.compare_cnt2 / size << endl;
+
 }

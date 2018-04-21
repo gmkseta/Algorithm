@@ -24,16 +24,23 @@ public:
 		head = new node(itemMIN, infoNIL, z, z);
 	}
 	~BST(){};
+
 	infoType BSTsearch(itemType v) {
 		struct node *x = head->r;
 		z->key = v;  // 아래 반복문을 간결히 만들기 위함
-		while (++compare&&v != x->key)  x = (v < x->key) ? x->l : x->r;
+		while (v != x->key)
+		{
+			++compare;
+			x = (v < x->key) ? x->l : x->r;
+		}
 		return x->info;
 	}
 	void BSTinsert(itemType v, infoType info) {
-		struct node *p, *x;
-		p = head; x = head->r;
-		while (x != z) { p = x; x = (v < x->key) ? x->l : x->r; }
+		struct node *p=head, *x = head->r;
+		while (x != z) 
+		{
+			p = x; x = (v < x->key) ? x->l : x->r;
+		}
 		x = new node(v, info, z, z);
 		if (v < p->key) p->l = x; else p->r = x;
 	}

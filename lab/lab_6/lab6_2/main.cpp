@@ -47,26 +47,21 @@ public:
 		while (++compare&&x->key != v && x != z) {
 			p = x;
 			x = (v < x->key) ? x->l : x->r;
-		}
-
-		
+		}		
 		if (x == z) return;
-		else t = x;
+		else t = x;		
 
-		
-		if (t->r == z) x = t->l;
-		else if (t->r->l == z) {
+		if (t->r == z) x = t->l;//첫 번째 경우
+		else if (t->r->l == z) {//두 번째 경우
 			x = t->r; x->l = t->l;
 		}
-		else {
-			
+		else {// 세 번째 나머지의 경우 .
 			c = x->r; while (c->l->l != z) c = c->l;
 			x = c->l; c->l = x->r;
 			x->l = t->l; x->r = t->r;
 		}
 		free(t);
 		if (v<p->key) p->l = x; else p->r = x;
-		
 	}
 
 };

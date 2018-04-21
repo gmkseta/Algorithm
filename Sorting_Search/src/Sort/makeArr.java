@@ -38,7 +38,7 @@ public class makeArr {
 	void printArr()
 	{
 		for(int i = dummy?1:0 ; i < (dummy?21:20) && i < N ; i++)
-			System.out.print(arr[i]+" ");
+			System.out.printf("%3d",arr[i]);
 		System.out.println();
 	}
 }

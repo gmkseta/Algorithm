@@ -97,11 +97,25 @@ public class sorting {
 	
 	static void shellSort(int A[],int n)
 	{
-		int h = 1;
+		int h = 1,i,j,value;
 		while(h<n)
-		{
 			h = 3*h+1;
-		}
+		
+		do {
+			h = h/3;
+			for(i = h ; i < n ;i++)
+			{
+				value = A[i];
+				j = i ;
+				while(A[j-h]>value) 
+				{
+					A[j]=A[j-h];
+					j-=h;
+					if(j<=h-1)break;
+				}
+			A[j]=value;	
+			}	
+		}while(h>1);
 		
 	}
 	
@@ -121,13 +135,13 @@ public class sorting {
 		
 		arr.des();
 		arr.printArr();
-		BubbleSort(arr.getArr(),n);
+		shellSort(arr.getArr(),n);
 		arr.printArr();
 		
 		
 		arr.rand();
 		arr.printArr();
-		BubbleSort(arr.getArr(),n);
+		shellSort(arr.getArr(),n);
 		arr.printArr();
 		
 		
