@@ -8,18 +8,14 @@ typedef int itemType;
 void shuffle(itemType* arr, int n)
 {
 	srand((unsigned int)time(NULL));
-
 	for (int i = 0; i < n; i++)
 	{
 		int a = rand() % n ;
-
 		itemType tmp = arr[a];
 		arr[a] = arr[i];
 		arr[i] = tmp;
 	}
 }
-
-
 
 std::string shellSort(itemType a[],int n)
 {
@@ -33,10 +29,9 @@ std::string shellSort(itemType a[],int n)
 			v = a[i]; 
 			++DataMove_Cnt;
 			j = i;
-
 			while (++Compare_Cnt&& a[j - h] > v)
 			{
-				a[j] = a[j - h]; j -= h; 
+				a[j] = a[j - h]; j -= h;
 				++DataMove_Cnt;
 				if (j < h - 1) break;
 			}
@@ -44,7 +39,6 @@ std::string shellSort(itemType a[],int n)
 			++DataMove_Cnt;
 		}
 	} while (h > 1);
-
 
 	std::string result = "\nCompare_Cnt : " + std::to_string(Compare_Cnt) + " DataMove_Cnt : " + std::to_string(DataMove_Cnt)+"\n";
 	return result;

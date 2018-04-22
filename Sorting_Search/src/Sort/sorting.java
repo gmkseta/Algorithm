@@ -118,7 +118,32 @@ public class sorting {
 		}while(h>1);
 		
 	}
-	
+	static int partition(int A[],int left , int right) 
+	{
+		int value,tmp;
+		tmp = left; value=A[tmp];
+		do {
+			while(A[++left]<value);
+			while(A[--right]>value);
+			if(left<right)swap(A,left,right);
+			else break;
+		}while(true);
+		
+		A[tmp] = A[right];
+		A[right] = value;
+		return right;
+		
+	}
+	static void quickSort(int A[],int left , int right)
+	{
+		int k ;
+		if (right>left)
+		{
+			k = partition(A,left,right);
+			quickSort(A,left,k-1);
+			quickSort(A,k+1,right);
+		}
+	}
 	static void swap(int A[],int i,int j)
 	{
 		int tmp = A[j];
@@ -135,7 +160,8 @@ public class sorting {
 		
 		arr.des();
 		arr.printArr();
-		shellSort(arr.getArr(),n);
+		//shellSort(arr.getArr(),n);
+		quickSort(arr.getArr(),0,n);
 		arr.printArr();
 		
 		
