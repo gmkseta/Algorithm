@@ -61,7 +61,7 @@ public:
 			x->l = t->l; x->r = t->r;
 		}
 		free(t);
-		if (v<p->key) p->l = x; else p->r = x;
+		if (++compare&&v<p->key) p->l = x; else p->r = x;
 	}
 
 };

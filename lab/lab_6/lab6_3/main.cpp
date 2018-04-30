@@ -69,8 +69,7 @@ public:
 	{
 		if (t != z) {
 			BSTtraversal(t->l, bst);
-			bst.BSTinsert(t->key, t->info);
-			std::cout << t->key << std::endl;
+			bst.BSTinsert(t->key, t->info);		
 			BSTtraversal(t->r, bst);
 		}
 	}

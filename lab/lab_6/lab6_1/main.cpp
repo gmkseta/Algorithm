@@ -30,8 +30,7 @@ public:
 		z->key = v;  // 아래 반복문을 간결히 만들기 위함
 		while (v != x->key)
 		{
-			++compare;
-			x = (v < x->key) ? x->l : x->r;
+			x = (++compare&&v < x->key) ? x->l : x->r;
 		}
 		return x->info;
 	}

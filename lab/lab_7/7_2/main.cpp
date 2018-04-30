@@ -1,59 +1,43 @@
+ï»¿#include<iostream>
+#include<ctime>
+#include<cstdlib>
 #define infoNIL 0
 #define itemMIN -1
 #define black 0
 #define red 1
 
-#include <iostream>
-#include <ctime>
 typedef int itemType;
-typedef double infoType;
+typedef int infoType;
 
-using namespace std;
-
-class RandomArray {
+class makeArr
+{
+private:
+	itemType* arr; int N;
 public:
-	itemType *a;
-	int size, n;
-
-	RandomArray(int max)
+	makeArr(int n) :N(n) { arr = new itemType[n]; }
+	void make_des_arr() { for (int i = 0; i < N; i++) arr[i] = N - i; }
+	void make_rand_arr()
 	{
-		a = new itemType[max]; size = max;
-	}
-	~RandomArray() { delete[] a; }
-	void sort(itemType **a, int n)
-	{
-		int i, j; itemType v, v2;
-		for (i = 1; i < n; i++)
+		srand((unsigned int)time(NULL));
+		make_des_arr();
+		for (int i = 0; i < N; i++)
 		{
-			v = a[i][0]; j = i;
-			v2 = a[i][1];
-			while (a[j - 1][0] > v) { a[j][0] = a[j - 1][0]; a[j][1] = a[j - 1][1]; j--; }
-			a[j][0] = v;
-			a[j][1] = v2;
+			int c = rand() % N;
+			itemType tmp = arr[c];
+			arr[c] = arr[i]; arr[i] = tmp;
 		}
 	}
-	void create_arr()
+	itemType get(int n) { return arr[n]; }
+	void print_arr()
 	{
-		itemType **temp = new itemType *[size + 1];
-		temp[0] = new itemType[2];
-		temp[0][0] = INT_MIN;
-		temp[0][1] = INT_MIN;
-		srand((unsigned)time(NULL));         // ÇöÀç½Ã°£À» ÀÌ¿ëÇØ ³­¼ö¹ß»ý±â rand()ÀÇ ÃÊ±â°ªÀ» Àç¼³Á¤
-		for (int i = 1; i <= size; i++) {
-			temp[i] = new itemType[2];
-			temp[i][0] = (1 + rand() % size);            // 1~n »çÀÌÀÇ ¼ýÀÚ n°³¸¦ ·£´ýÇÏ°Ô »ý¼º
-			temp[i][1] = i;
-		} // ³­¼ö°¡ ¸¸µé¾îÁú ¶§¸¶´Ù 1¾¿ Áõ°¡½ÃÄÑ°¡¸ç °¢ ³­¼öÀÇ °íÀ¯ ÀÎµ¦½º¸¦ »ý¼º
-		sort(temp, size);            // ³­¼ö a[i][0]µéÀ» Á¤·ÄÇÑ µÚ ±× ¼ø¼­´ë·Î ÀÎµ¦½º a[i][1]µéÀ» ³ª¿­½ÃÅ°¸é B°¡ »ý¼º
-
-		for (int i = 1; i <= size; i++)
-		{
-			a[i - 1] = temp[i][1];
-		}
-		for (int i = 0; i < size + 1; i++) { delete[] temp[i]; }
-		delete[] temp;
+		for (int i = 0; i < 20; i++)
+			std::cout << arr[i] << " ";
+		std::cout << std::endl;
 	}
 };
+
+
+
 class RBtree {
 private:
 	struct node {
@@ -64,109 +48,204 @@ private:
 			key = k; Info = i; tag = t; l = ll; r = rr;
 		}
 	};
+
 	struct node *head, *tail, *x, *p, *g, *gg, *z;
+
 public:
-	double compare_cnt1;
-	double compare_cnt2;
-	RBtree(int max) {
+	double comp_cnt, srch_cnt;
+	RBtree(int max) :comp_cnt(0.0), srch_cnt(0.0) {
 		z = new node(0, infoNIL, black, 0, 0);
 		z->l = z; z->r = z;
 		head = new node(itemMIN, infoNIL, black, z, z);
-		compare_cnt1 = 0;
-		compare_cnt2 = 0;
 	}
-	~RBtree() {}
-	void insert(itemType k, infoType info);
-	struct node *rotate(itemType k, struct node *y);
-	void split(itemType k);
-	infoType search(itemType k);
-};
-void RBtree::insert(itemType k, infoType info)
-{
-	x = head; p = head; g = head;
-	while (x != z) {
-		gg = g; g = p; p = x; //gg:ºÎ¸ðÀÇ ºÎ¸ðÀÇ ºÎ¸ð, g:ºÎ¸ðÀÇ ºÎ¸ð, p : ºÎ¸ð
-		x = (k < x->key) ? x->l : x->r;
-		if (x->l->tag && x->r->tag)split(k); //µÎ ÀÚ½ÄÀÌ ¸ðµÎ ·¹µå¶óÀÎÀÏ ¶§ ºÐÇÒ
-		compare_cnt1++;
-	}
-	x = new node(k, info, red, z, z);
-	if (k < p->key)p->l = x; else p->r = x;
-	split(k); head->r->tag = black;
-}
-struct RBtree::node  *RBtree::rotate(itemType k, struct RBtree::node *y)
-{
-	struct RBtree::node *high, *low;
-	high = (k < y->key) ? y->l : y->r;
-	//right È¸Àü
-	if (k < high->key) { low = high->l; high->l = low->r; low->r = high; }
-	//left È¸Àü
-	else { low = high->r; high->r = low->l; low->l = high; }
-	if (k < y->key) y->l = low; else y->r = low;
-	return low;
-}
-void RBtree::split(itemType k)
-{
-	x->tag = red; x->l->tag = black; x->r->tag = black;
-	if (p->tag) {
-		g->tag = red;
-		if (k < g->key != k < p->key)p = rotate(k, g);
-		x = rotate(k, gg);
-		x->tag = black;
-	}
-}
 
-infoType RBtree::search(itemType k)
-{
-	struct RBtree::node *x = head->r;
-	z->key = k;  // ¾Æ·¡ ¹Ýº¹¹®À» °£°áÈ÷ ¸¸µé±â À§ÇÔ
-	while (k != x->key) { x = (k < x->key) ? x = x->l : x = x->r; compare_cnt2++; }
-	return x->Info;
-}
+	void insert(itemType k, infoType info) {
+		x = head; p = head; g = head;
+		while (++comp_cnt&&x != z) {
+			gg = g; g = p; p = x;
+
+			x = (k < x->key) ? x->l : x->r;
+			if (x->l->tag && x->r->tag) split(k);
+		}
+		x = new node(k, info, red, z, z);
+		if (k < p->key) p->l = x; else p->r = x;
+		split(k); head->r->tag = black;
+	}
+
+	struct node *rotate(itemType k, struct node *y) {
+		struct node *high, *low;
+		high = (k < y->key) ? y->l : y->r;
+		if (k < high->key) { low = high->l; high->l = low->r; low->r = high; }
+		else { low = high->r; high->r = low->l; low->l = high; }
+		if (k < y->key) y->l = low; else y->r = low;
+		return low;
+	}
+	void split(itemType k) {
+		x->tag = red; x->l->tag = black; x->r->tag = black;
+		if (p->tag) {
+			g->tag = red;
+			if (k < g->key != k < p->key) p = rotate(k, g);
+			x = rotate(k, gg);
+			x->tag = black;
+		}
+	}
+	infoType search(itemType k) {
+		struct node *x = head->r;
+		z->key = k;
+		while (++srch_cnt&&k != x->key)x = (k < x->key) ? x->l : x->r;
+		return x->key;
+	}
+
+	void RBtraversal(node* t)
+	{
+		if (t != z) {
+			RBtraversal(t->l);
+			std::cout << t->key << " ";
+			RBtraversal(t->r);
+		}
+	}
+	node* getHead()
+	{
+		return head;
+	}
+};
+
+class BST {
+private:
+	struct node {
+		itemType key; infoType info;
+		struct node *l, *r;
+		node(itemType k, infoType i, struct node *ll, struct node *rr)  // node ìƒì„±ì‹œ ì´ˆê¸°ê°’ ë¶€ì—¬ ê°€ëŠ¥ 
+		{
+			key = k; info = i; l = ll; r = rr;
+		};
+	};
+	struct node *head, *z; // z : Listì˜ ëì„ ëŒ€í‘œí•˜ëŠ” node pointer â€“ NULLì— í•´ë‹¹
+public:
+	double comp_cnt, srch_cnt;
+	BST(int max) :comp_cnt(0.0), srch_cnt(0.0) {
+		z = new node(0, infoNIL, 0, 0);
+		head = new node(itemMIN, infoNIL, z, z);
+	}
+	~BST() {};
+
+	infoType BSTsearch(itemType v) {
+		struct node *x = head->r;
+		z->key = v;  // ì•„ëž˜ ë°˜ë³µë¬¸ì„ ê°„ê²°ížˆ ë§Œë“¤ê¸° ìœ„í•¨
+		while (++srch_cnt&&v != x->key)  x = (v < x->key) ? x->l : x->r;
+		return x->info;
+	}
+
+	void BSTinsert(itemType v, infoType info) {
+		struct node *p, *x;
+		p = head; x = head->r;
+
+		while (++comp_cnt&&x != z) {
+			p = x;
+			x = (v < x->key) ? x->l : x->r;
+		}
+		x = new node(v, info, z, z);
+		if (v < p->key) p->l = x; else p->r = x;
+
+	}
+
+	void BSTdelete(itemType v) {
+		struct node *x = head->r, *p, *t, *c;
+		p = head;
+		while (x->key != v && x != z) {
+			p = x;
+			x = (v < x->key) ? x->l : x->r;
+		}
+		if (x == z) return;
+		else t = x;
+		if (t->r == z) x = t->l;
+		else if (t->r->l == z) {
+			x = t->r; x->l = t->l;
+		}
+		else {
+			c = x->r; while (c->l->l != z) c = c->l;
+			x = c->l; c->l = x->r;
+			x->l = t->l; x->r = t->r;
+		}
+		free(t);
+		if (v<p->key) p->l = x; else p->r = x;
+	}
+
+	void BSTtraversal(node* t, BST* bst)
+	{
+		if (t != z) {
+			BSTtraversal(t->l, bst);
+			bst->BSTinsert(t->key, t->info);
+			BSTtraversal(t->r, bst);
+		}
+	}
+	void RBtraversal(node* t, RBtree* rbt)
+	{
+		if (t != z) {
+			RBtraversal(t->l, rbt);
+			rbt->insert(t->key, t->info);
+			RBtraversal(t->r, rbt);
+		}
+	}
+	node* getHead()
+	{
+		return head;
+	}
+	void trb(node* t)
+	{
+		if (t != z) {
+			trb(t->l);
+			std::cout << t->key << " ";
+			trb(t->r);
+		}
+	}
+
+};
+
 
 class HashTable {
 private:
-	struct Node
+	struct node
 	{
 		itemType id;
 		infoType info;
-		Node* hashNext;
-		Node(itemType key, infoType inf) { id = key; info = inf; hashNext = NULL; }
+		node* next;
+		node(itemType key, infoType inf) { id = key; info = inf; next = NULL; }
 	};
-	Node** hashTable;
+	node** List;
 	int size;
+
 public:
-	double compare_cnt1, compare_cnt2;
-	HashTable(int max) {
-		hashTable = new Node*[max];   size = max;
-		compare_cnt1 = 0; compare_cnt2 = 0;
+	double cmp_cnt, srch_cnt;
+	HashTable(int max) :size(max), cmp_cnt(0), srch_cnt(0) {
+		List = new node*[max];
 	}
+
 	void insert(itemType key, infoType info)
 	{
-		Node *node = new Node(key, info);
-		int hash_key = key % size;
-		if (hashTable[hash_key] == NULL) { hashTable[hash_key] = node; compare_cnt1++; }
+		int h_key = key % size;
+		node *tmp = new node(key, info);
+
+		if (List[h_key] == NULL) { List[h_key] = tmp; }
 		else {
-			node->hashNext = hashTable[hash_key];
-			hashTable[hash_key] = node;
-			compare_cnt1++;
+			tmp->next = List[h_key];
+			List[h_key] = tmp;
 		}
+		cmp_cnt++;
 	}
+
 	infoType search(itemType key)
 	{
-		int hash_key = key%size;
-		if (hashTable[hash_key] == NULL) {
-			compare_cnt2++; return NULL;
-		}
-		if (hashTable[hash_key]->id == key) {
-			compare_cnt2++; return hashTable[hash_key]->info;
-		}
-		else {
-			Node* temp = hashTable[hash_key];
-			while (temp) {
-				if (++compare_cnt2&& temp->id == key) return temp->info;
-				temp = temp->hashNext;
-			}
+		int h_key = key%size;
+
+		node* tmp = List[h_key];
+
+		while (++srch_cnt&&tmp != NULL)
+		{
+			if (tmp->id == key)
+				return tmp->info;
+			else
+				tmp = tmp->next;
 		}
 		return NULL;
 	}
@@ -175,35 +254,38 @@ public:
 
 int main()
 {
-	int size;
+	using namespace std;
 
-	cout << "¹è¿­ÀÇ Å©±â¸¦ ÀÔ·ÂÇÏ¼¼¿ä N(10000>N>=1000)" << endl;
-	cin >> size;
-	RandomArray arr(size);
-	arr.create_arr();
-	RBtree T3(size);
+	int n;
+	cout << "ë°°ì—´ì˜ í¬ê¸°ë¥¼ ìž…ë ¥í•˜ì„¸ìš” (20000>= n >=100)" << endl;
+	cin >> n;
+	srand((unsigned int)time(NULL));
+	makeArr arr(n);
+	RBtree T3(n);
+	arr.make_rand_arr();
 	HashTable h1(11), h2(101), h3(1009);
-
-	for (int i = 0; i < size; i++)
+	
+	for (int i = 0; i < n; i++)
 	{
-		T3.insert(arr.a[i], i);
-		h1.insert(arr.a[i], i);
-		h2.insert(arr.a[i], i);
-		h3.insert(arr.a[i], i);
+		T3.insert(arr.get(i), i);
+		h1.insert(arr.get(i), i);
+		h2.insert(arr.get(i), i);
+		h3.insert(arr.get(i), i);
 	}
-	for (int i = 1; i <= size; i++)
+	for (int i = 1; i <= n; i++)
 	{
 		T3.search(i);
 		h1.search(i); h2.search(i); h3.search(i);
 	}
-	cout << "T3ÀÇ ±¸Ãà ½Ã Æò±Õ ºñ±³ È¸¼ö : " << T3.compare_cnt1 / size << endl;
-	cout << "Hash TableÅ©±â°¡ 11ÀÎ °æ¿ìÀÇ ±¸Ãà½Ã Æò±Õ ºñ±³ È¸¼ö : " << h1.compare_cnt1 /size << endl;
-	cout << "Hash TableÅ©±â°¡ 101ÀÎ °æ¿ìÀÇ ±¸Ãà½Ã Æò±Õ ºñ±³ È¸¼ö: " << h2.compare_cnt1 /size<< endl;
-	cout << "Hash TableÅ©±â°¡ 1009ÀÎ °æ¿ìÀÇ ±¸Ãà½Ã Æò±Õ ºñ±³ È¸¼ö : " << h3.compare_cnt1 /size << endl;
+	cout << "T3ì˜ êµ¬ì¶• ì‹œ í‰ê·  ë¹„êµ íšŒìˆ˜ : " << T3.comp_cnt / n << endl;
+	cout << "Hash Table í¬ê¸°ê°€ 11ì¸ ê²½ìš°ì˜ êµ¬ì¶•ì‹œ í‰ê·  ë¹„êµ íšŒìˆ˜ : " << h1.cmp_cnt / n << endl;
+	cout << "Hash Table í¬ê¸°ê°€ 101ì¸ ê²½ìš°ì˜ êµ¬ì¶•ì‹œ í‰ê·  ë¹„êµ íšŒìˆ˜: " << h2.cmp_cnt / n << endl;
+	cout << "Hash Table í¬ê¸°ê°€ 1009ì¸ ê²½ìš°ì˜ êµ¬ì¶•ì‹œ í‰ê·  ë¹„êµ íšŒìˆ˜ : " << h3.cmp_cnt / n << endl << endl;
 
-	cout << "T3ÀÇ Æò±Õ ºñ±³ È¸¼ö : " << T3.compare_cnt2 / size << endl;
-	cout << "Hash TableÅ©±â°¡ 11ÀÎ °æ¿ì Æò±Õ ºñ±³ È¸¼ö : " << h1.compare_cnt2 / size << endl;
-	cout << "Hash TableÅ©±â°¡ 101ÀÎ °æ¿ì Æò±Õ ºñ±³ È¸¼ö : " << h2.compare_cnt2 / size << endl;
-	cout << "Hash TableÅ©±â°¡ 1009ÀÎ °æ¿ì Æò±Õ ºñ±³ È¸¼ö : " << h3.compare_cnt2 / size << endl;
+	cout << "T3ì˜ í‰ê·  ë¹„êµ íšŒìˆ˜ : " << T3.srch_cnt / n << endl;
+	cout << "Hash Tableí¬ê¸°ê°€ 11ì¸ ê²½ìš° í‰ê·  ë¹„êµ íšŒìˆ˜ : " << h1.srch_cnt / n << endl;
+	cout << "Hash Tableí¬ê¸°ê°€ 101ì¸ ê²½ìš° í‰ê·  ë¹„êµ íšŒìˆ˜ : " << h2.srch_cnt / n << endl;
+	cout << "Hash Tableí¬ê¸°ê°€ 1009ì¸ ê²½ìš° í‰ê·  ë¹„êµ íšŒìˆ˜ : " << h3.srch_cnt / n << endl;
 
+	return 0;
 }

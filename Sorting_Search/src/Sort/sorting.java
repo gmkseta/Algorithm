@@ -1,8 +1,12 @@
 package Sort;
 import java.util.Scanner;
 
+
+
 public class sorting {
 
+	
+	
 	
 	/*****************************************************
 	첫 인덱스와 가장 작은 숫자를 swap
@@ -123,7 +127,7 @@ public class sorting {
 		int value,tmp;
 		tmp = left; value=A[tmp];
 		do {
-			while(A[++left]<value);
+			while(left<A.length-1&&A[++left]<value);
 			while(A[--right]>value);
 			if(left<right)swap(A,left,right);
 			else break;
