@@ -1,161 +1,125 @@
+#include <algorithm>
 #include <iostream>
 #include <cstdlib>
 #include <string>
 
-using namespace std;
-
-class Search
-{
+class StringInfo {
 private:
-	const int q = 33554393;
-	const int d = 2;
+	char** p;
+	char** a;
 public:
-	char **p;
-	char **a;
-	int compare = 0;
-
-	Search()
+	StringInfo()
 	{
 		a = new char*[100];
+		p = new char*[10];
 		for (int i = 0; i < 100; i++)
 		{
 			a[i] = new char[100];
 			for (int j = 0; j < 100; j++)
-			{
 				a[i][j] = 'A';
-			}
 		}
-
-		p = new char*[10];
 		for (int i = 0; i < 10; i++)
 		{
 			p[i] = new char[10];
 			for (int j = 0; j < 10; j++)
-			{
 				p[i][j] = 'A';
-			}
 		}
 		p[9][9] = 'B';
+		
 	}
+	char* get_p(int i) { return p[i]; }
+	char* get_a(int i) { return a[i]; }
+	char** get_dp() { return p; }
+	char** get_da() { return a; }
 
-	void brutesearch()
-	{  //p : Pattern String, a : Text String
-		int i, j, u, r;
-		int m_x = 100;
-		int m_y = 100;
-		int n_x = 10;
-		int n_y = 10;
-		int flag = 0;
-		int temp = 0;
-		for (u = 0; u <= m_y - n_y; u++) // 큰 배열의 y 축
-		{
-			for (r = 0; r <= m_x - n_x; r++) // 큰 배열의 x 축
-			{
-				if (temp == n_x*n_y) // temp값이 배열의 x축 곱하기 y축 값과 일치한다면, 그 곳이 바로 일치하는 부분.
-				{
-					// cout << "시작점" << " : " << u << " , " << r - 1 << endl;
-				}
-				temp = 0;
-				for (i = 0; i < n_y; i++) // 작은 배열의 y 축
-				{
-					for (j = 0; j < n_x; j++) // 작은 배열의 x 축
-					{
-						if (++compare && p[i][j] != a[i + u][j + r]) // 만약 같지 않다면 
-						{
-							flag = 1; // 해당 배열 x,y 에서 나가기 위한 flag 값 지정.
-							break;
-						}
-						temp++; // 만약에 문자가 하나씩 일치하면, temp값 증가
-					}
 
-					if (flag == 1) // y축의 for문에서도 나가기 위함.
-					{
-						flag = 0;
-						break;
-					}
-				}
-			}
-		}
-		cout << compare << endl;
-	}
-
-	void rksearch()
-	{
-		int i, j, u, r;
-		int dM = 1, h2 = 0, h1 = 0;
-		int m_x = 100;
-		int m_y = 100;
-		int n_x = 10;
-		int n_y = 10;
-		int flag = 0;
-		int temp = 0;
-		int compare = 0;
-
-		for (i = 0; i < n_x - 1; i++)
-			dM = (d*dM) % q;
-
-		for (i = 0; i < n_y; i++)
-		{
-			for (j = 0; j < n_x; j++)
-			{
-				h1 = (h1*d + p[i][j]) % q; // 패턴 스트링이 더 작으므로, h1이 패턴스트링의 값을 기준으로 해쉬가 정해짐.
-				h2 = (h2*d + a[i][j]) % q;
-			}
-		}
-
-		for (u = 0; u <= m_y - n_y; u++) // TEXT String의 y축
-		{
-			for (r = 0; r <= m_x - n_x; r++) // TEXT String의 x축
-			{
-				if (++compare && r < m_x - n_x) // 새로운 h2를 할당한다.
-				{
-					h2 = 0;
-					for (i = 0; i < n_y; i++)
-					{
-						for (j = 0; j < n_x; j++)
-						{
-							h2 = (h2*d + a[i + u][j + r]) % q;
-						}
-					}
-				}
-
-				if (h1 == h2) // 만약 해시값이 같으면, 그때 brutesearch를 활용하여 찾는다.
-				{
-					for (i = 0; i < n_y; i++)
-					{
-						for (j = 0; j < n_x; j++)
-						{
-							if (++compare && p[i][j] != a[i + u][j + r])
-							{
-								flag = 1;
-								break;
-							}
-							temp++;
-						}
-						if (flag == 1)
-						{
-							flag = 0;
-							break;
-						}
-					}
-					if (temp == n_x*n_y)
-					{
-						// cout << "시작점" << " : " << u << " , " << r - 1 << endl;
-					}
-					temp = 0;
-				}
-			}
-		}
-		cout << compare << endl;
-	}
 };
 
 
+class Search {
+private:
+	int *SP;  // SP에 대한 메모리는 p의 크기만큼 동적 할당 해야한다.
+	static const int q = 33554393;
+	static const int d = 26;
+
+public:
+	static int brutesearch(char *p, char *a) {  //p : Pattern String, a : Text String
+		int i, j, m = 10, n = 100;
+		int cmp = 0;
+		for (i = 0; i <= n - m; i++) {
+			for (j = 0; j<m; j++) {
+ 				if (++cmp&&a[i + j] != p[j]) 
+					break;
+			}
+			if (j == m) {}//결과}
+		}
+			return cmp;
+	}
+	
+
+	static int rksearch(char **p, char **a) {
+		int i, j, x, y;
+		int dM = 1, h1 = 0, h2 = 0, flag, cmp = 0;
+		int m = 10, n = 100;
+
+
+		for (i = 0; i < m - 1; i++)
+			for (j = 0; j < m - 1; j++)
+				dM = (d*dM) % q;
+
+		for (i = 0; i < m; i++) {
+			for (x = 0; x < m; x++) {
+				h1 = (h1*d + p[i][x] - 65) % q;
+				h2 = (h2*d + a[i][x] - 65) % q;
+			}
+		}
+
+
+		
+
+		for (i = 0; i < n - m + 1; i++) {
+			for (j = 0; j < n - m + 1; j++) {
+				flag = 0;
+				if (++cmp&&h1 == h2) {
+					flag = 1;
+					for (x = i; x < m + i; x++)
+						for(y=j;y<m+i;y++)
+							if (++cmp&&a[i][j] != p[i][j - i])
+							{	
+							flag = 0; break;
+							}
+				}
+				if (flag) {}//std::cout << i << ",";} // 결과값 출력
+	
+				if (j < n - m + 1) {
+					for (x = 0; x < m; x++)
+					{
+							h2 = (h2 - (a[x+i][j] - 65)*dM);
+							h2 = (h2*d + a[x+i][m+j] - 65) % q;
+					
+					}
+				}
+			}
+		}
+		return cmp;
+	}
+};
 int main()
 {
-	Search search;
-	search.brutesearch();
-	search.rksearch();
 
-	system("pause");
+
+	StringInfo str;
+	int sum = 0;
+	for (int i = 0; i <= 90; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			sum+=Search::brutesearch(str.get_p(j), str.get_a(j+i));
+		}
+	}
+	std::cout << sum << std::endl;
+	sum = 0;
+	sum += Search::rksearch(str.get_dp(), str.get_da());
+	
+	std::cout << sum << std::endl;
 }
