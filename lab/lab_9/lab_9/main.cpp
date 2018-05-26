@@ -111,6 +111,7 @@ private:
 
 public:
 	~BoyerMoore() {  }
+
 	void boyerMoore(char *p, char *a) {
 		int cmp = 0;
 		int i, j, m = strlen(p), n = strlen(a);
@@ -119,14 +120,13 @@ public:
 		GoodSuffix(p);
 		j = 0;
 		while (++cmp&&j <= n - m) {
-			for (i = m - 1; i >= 0 && p[i] == a[j + i]; i--);//패턴 문자 비교를 우에서 좌로 
+			for (i = m - 1; i >= 0 && p[i] == a[j + i]; i--);
 			if (i == -1) {//i가 -1 이면 다맞는거이므로 위치 출력
 				printf("%d, ", j);
-				j = j + skip[-1];//
+				j = j + skip[-1];
 			}
 			else { j = j + std::max(skip[i], i - lp[index[a[j + i]]]); }
 		}
-
 		std::cout << cmp << std::endl;
 	}
 
