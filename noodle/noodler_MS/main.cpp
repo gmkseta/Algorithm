@@ -1,16 +1,19 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
-#include <math.h>
+#include <cstdlib>
+#include <ctime>
+#include <cmath>
+#include <algorithm>
+#include <iostream>
 #define norm_rand() (rand()/(RAND_MAX + 1.0))
 #define S 10
 
 double expntl(double);
+
+
 int main()
 {
+	
 	int n;//n은 현재 있는 customer 수인듯
-
-		  //arrival time , Service time
+	//arrival time , Service time
 	double Ta = 200.0, Ts = 100.0, simulation_time = 200000.0, next_arrival_time, next_departure_time;
 
 	double elapsed_time;
@@ -82,6 +85,7 @@ int main()
 	U = B / elapsed_time; printf("utilization = %f\n", U);
 	L = s / elapsed_time; printf("mean customer no. in store = %f \n", L);
 	W = L / X; printf("mean residence time per customer = %f \n", W);
+	std::cout << "d" << std::endl;
 }
 
 double expntl(double x)
