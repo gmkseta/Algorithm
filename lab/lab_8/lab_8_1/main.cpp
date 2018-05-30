@@ -56,12 +56,35 @@ public:
 		initSP(p);
 		int cmp = 0;
 		for (i = 0, j = -1; i <= n - 1; i++) {
-			while ((j >= 0) && (p[j + 1] != a[i])) j = SP[j];
+			std::cout << a << std::endl;
+			for (int x = 0; x < i; x++) {std::cout << " ";	}
+			std::cout << p << std::endl;
+			for (int x = 0; x < i + j; x++) { std::cout << " "; }
+			std::cout << "A" << std::endl;
+			std::cout << j << std::endl;
+			system("pause");
+
+			while ((j >= 0) && (p[j + 1] != a[i]))
+			{
+				j = SP[j];
+				system("cls");
+				std::cout << a << std::endl;
+				for (int x = 0; x < i; x++) { std::cout << " "; }
+				std::cout << p << std::endl;
+				for (int x = 0; x < i + j; x++) { std::cout << " "; }
+				std::cout << "A" << std::endl;
+				std::cout << j << std::endl;
+				system("pause");
+
+			}
 			if (++cmp&&p[j + 1] == a[i]) j++;
+			
 			if (j == m - 1) {
 				std::cout << i-m+1 << ",";
 				j = SP[j];
 			}
+			
+			system("cls");
 		}
 		std::cout << cmp << std::endl;
 	}
@@ -114,9 +137,10 @@ int main()
 	
 	
 	StringInfo str;
-	Search::brutesearch(str.get_p(), str.get_a());
+	//Search::brutesearch(str.get_p(), str.get_a());
 	Search srch;
 	srch.kmpsearch(str.get_p(), str.get_a());
-	Search::rksearch(str.get_p(), str.get_a());
+
+	//Search::rksearch(str.get_p(), str.get_a());
 
 }
