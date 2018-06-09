@@ -38,9 +38,60 @@ int EditDist(int n, std::string X, int m, std::string Y, int ins, int del, int c
 		cout << endl;
 	}
 
+	srand((unsigned int)time(NULL));
+	
+	int i = 0, j = 0;
+	string route = "";
 
-	cout << "C O O O C O O O"<<endl;
 
+	do {
+		int r = rand() % 3;
+		
+		if (i == n)	r = 0;
+		else if (j == m)r = 1;
+
+		switch (r)
+		{
+		case 0://삽입 연산시
+			if (D[i][j] < D[i][j + 1])
+			{
+				j++;
+				route += "I ";
+				break;
+			}
+			else if (i == n)
+			{
+				i = 0, j = 0, route = ""; break;
+			}
+		case 1://삭제 연산시
+			if (D[i][j] < D[i+1][j])
+			{
+				i++;
+				route += "D ";
+				break;
+			}
+			else if (j == m)
+			{
+				i = 0, j = 0, route = ""; break;
+			}
+		case 2://변경 연산시
+			if (D[i][j] < D[i + 1][j+1])
+			{
+				i++, j++;
+				route += "C ";
+				break;
+			}
+			else if (D[i][j] == D[i + 1][j + 1])
+			{
+				i++, j++;
+				route += "O ";
+				break;
+			}
+		}
+	} while (!(i==n&&j==m));
+	
+	cout << route << endl;
+	
 
 	return D[n][m];
 
@@ -67,5 +118,6 @@ int main()
 	EditDist(first.size(), first, second.size(), second, 1, 1, 2);
 
 
+	return 0;
 
 }
