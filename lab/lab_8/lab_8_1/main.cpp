@@ -75,7 +75,6 @@ public:
 				std::cout << "A" << std::endl;
 				std::cout << j << std::endl;
 				system("pause");
-
 			}
 			if (++cmp&&p[j + 1] == a[i]) j++;
 			

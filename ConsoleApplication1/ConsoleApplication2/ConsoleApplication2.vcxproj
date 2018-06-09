@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3DC7919B-FAE6-49F0-B3FC-AA106C6B67D1}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>ConsoleApplication2</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\animation.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\board.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\boardloader.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\direction.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\fps.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\fruit.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\game.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\ghost.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\imageloader.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\imageutil.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\input.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\intermission.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\item.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\main.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\menu.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\missile.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\pacman.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\pellet.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\physics.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\renderer.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\socket.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\sound.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\text.c" />
+    <ClCompile Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\window.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\animation.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\board.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\boardloader.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\direction.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\fps.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\fruit.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\game.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\ghost.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\imageloader.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\imageutil.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\input.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\intermission.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\item.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\main.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\menu.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\missile.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\pacman.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\pellet.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\physics.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\renderer.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\socket.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\sound.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\text.h" />
+    <ClInclude Include="..\..\..\..\..\2018-1-OSSP-FCTC-4\pacman_2018_fctc\src\window.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
